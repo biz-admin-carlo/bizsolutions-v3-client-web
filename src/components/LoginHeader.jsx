@@ -1,19 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import icon from "../assets/icons/icon-app-logo.jpg";
-
-const solutions = ["Mobile Development", "SEO Solutions", "Social Media Management", "Website Development", " Website Revamp"];
-const services = ["Bookkeping", "Customer Support", "Sales & Collection", "Technical & IT Support"];
 
 const LoginHeader = () => {
   const navigate = useNavigate();
-  const [activeDropdown, setActiveDropdown] = useState(null);
-
-  const toggleDropdown = (menu) => {
-    setActiveDropdown(activeDropdown === menu ? null : menu);
-  };
-
   return (
     <header className="bg-orange-400">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -31,95 +21,77 @@ const LoginHeader = () => {
             <ul className="flex justify-center gap-6 text-sm">
             <li>
               <button
-                className="text-gray-700 transition hover:text-black/75"
+                className="group relative text-gray-700 transition hover:text-black/75"
                 onClick={() => navigate("/home")}
               >
                 Home
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all group-hover:w-full"></span>
               </button>
             </li>
 
-              <li>
-                <button
-                className="text-gray-700 transition hover:text-black/75"
+            <li>
+              <button
+                className="group relative text-gray-700 transition hover:text-black/75"
                 onClick={() => navigate("/pricing")}
-                >
-                  Pricing
-                </button>
-              </li>
-{/* 
-              <li className="relative">
-                <button
-                  type="button"
-                  onClick={() => toggleDropdown("solutions")}
-                  className="flex items-center gap-1 text-black transition hover:text-black/75"
-                >
-                  Solutions
-                  {activeDropdown === "solutions" ? <FaAngleUp /> : <FaAngleDown />}
-                </button>
+              >
+                Pricing
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all group-hover:w-full"></span>
+              </button>
+            </li>
 
-                {activeDropdown === "solutions" && (
-                  <div className="absolute left-0 z-10 mt-2 w-80 rounded-md bg-white shadow-lg border">
-                    {solutions.map((solution) => (
-                      <a
-                        key={solution}
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => setActiveDropdown(null)}
-                      >
-                        {solution}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </li>
-
-              <li className="relative">
-                <button
-                  type="button"
-                  onClick={() => toggleDropdown("services")}
-                  className="flex items-center gap-1 text-black transition hover:text-black/75"
-                >
-                  Services
-                  {activeDropdown === "services" ? <FaAngleUp /> : <FaAngleDown />}
-                </button>
-
-                {activeDropdown === "services" && (
-                  <div className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-white shadow-lg border">
-                    {services.map((service) => (
-                      <a
-                        key={service}
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => setActiveDropdown(null)}
-                      >
-                        {service}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </li> */}
-
-              <li>
-                <button
-                className="text-gray-700 transition hover:text-black/75"
+            <li>
+              <button
+                className="group relative text-gray-700 transition hover:text-black/75"
                 onClick={() => navigate("/company-history")}
-                >
-                 About
-                </button>
-              </li>
+              >
+                About
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all group-hover:w-full"></span>
+              </button>
+            </li>
 
-
-              <li>
-                <button
-                className="text-gray-700 transition hover:text-black/75"
+            <li>
+              <button
+                className="group relative text-gray-700 transition hover:text-black/75"
                 onClick={() => navigate("/contact-us")}
-                >
-                 Contact
-                </button>
-              </li>
+              >
+                Contact
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all group-hover:w-full"></span>
+              </button>
+            </li>
+
+            {/* <li>
+              <button
+                className="group relative text-gray-700 transition hover:text-black/75"
+                onClick={() => navigate("/contact-us")}
+              >
+                Account
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-black transition-all group-hover:w-full"></span>
+              </button>
+            </li> */}
 
             </ul>
           </nav>
+
+          <div className="flex justify-end items-center">
+            <button
+              className="text-white transition py-2 hover:text-gray-300"
+              onClick={() => navigate("/login")}
+            >
+              <a
+                className="group relative inline-block overflow-hidden border border-black px-8 py-3 focus:ring-3 focus:outline-hidden"
+              >
+                <span
+                  className="absolute inset-y-0 left-0 w-[2px] bg-black transition-all group-hover:w-full"
+                ></span>
+
+                <span
+                  className="relative text-sm font-medium text-black transition-colors group-hover:text-orange-500"
+                >
+                  Login
+                </span>
+              </a>
+            </button>
+          </div>
 
         </div>
       </div>

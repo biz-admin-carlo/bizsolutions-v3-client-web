@@ -60,6 +60,10 @@ const ResultPage = () => {
     fetchArticles();
   }, [location]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
@@ -157,7 +161,7 @@ const ResultPage = () => {
               currentArticles.map((article) => (
                 <article
                   key={article.id}
-                  className="mb-4 rounded-xl bg-white p-4 ring-3 ring-orange-50 sm:p-6 lg:p-8 cursor-pointer" 
+                  className="mb-4 rounded-xl bg-white p-4 ring-3 ring-orange-50 sm:p-6 lg:p-8 cursor-pointer"
                   onClick={() => handleArticleClick(article)}
                 >
                   <div className="flex items-start sm:gap-6">
@@ -168,9 +172,11 @@ const ResultPage = () => {
                           <h3 className="text-lg font-medium sm:text-xl">
                             {article.name}
                           </h3>
-                          <span className="flex items-center gap-1 whitespace-nowrap bg-purple-100 px-1 py-0.5 text-sm text-purple-700">
-                            <IoStarSharp className="text-yellow-500" /> {article.rating}
-                          </span>
+                          {article.subscriptionName && (
+                            <span className="flex items-center gap-1 whitespace-nowrap bg-purple-100 px-1 py-0.5 text-sm text-purple-700">
+                              <IoStarSharp className="text-yellow-500" /> {article.rating}
+                            </span>
+                          )}
                         </div>
                       </div>
 
@@ -190,16 +196,22 @@ const ResultPage = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4 mt-3">
-                        <div className="flex items-center gap-1">
-                          <IoCall className="text-gray-700" />
-                          <p className="text-sm text-gray-700">{article.display_phone}</p>
-                        </div>
-                      </div>
+                      {article.subscriptionName && (
+                        <>
+                          <div className="flex items-center gap-4 mt-3">
+                            <div className="flex items-center gap-1">
+                              <IoCall className="text-gray-700" />
+                              <p className="text-sm text-gray-700">{article.display_phone}</p>
+                            </div>
+                          </div>
 
-                      <div className="mt-3">
-                        <p className="text-sm text-gray-700">{article.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?"}</p>
-                      </div>
+                          <div className="mt-3">
+                            <p className="text-sm text-gray-700">
+                              {article.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis perferendis hic asperiores quibusdam quidem voluptates doloremque reiciendis nostrum harum. Repudiandae?"}
+                            </p>
+                          </div>
+                        </>
+                      )}
                     </div>
                     {renderSubscriptionBadge(article)}
                   </div>
@@ -211,29 +223,35 @@ const ResultPage = () => {
       </div>
 
       <div className="flex justify-center mt-6">
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          className="px-3 py-1 mx-1 border rounded-md text-gray-700 bg-white hover:bg-gray-100"
-          disabled={currentPage === 1}
-        >
-          Prev
-        </button>
+        {currentPage > 1 && (
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            className="px-3 py-1 mx-1 border rounded-md text-gray-700 bg-white hover:bg-gray-100"
+          >
+            Prev
+          </button>
+        )}
+
         {[...Array(totalPages)].map((_, index) => (
           <button
             key={index + 1}
             onClick={() => paginate(index + 1)}
-            className={`px-3 py-1 mx-1 border rounded-md ${currentPage === index + 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+            className={`px-3 py-1 mx-1 border rounded-md ${
+              currentPage === index + 1 ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
           >
             {index + 1}
           </button>
         ))}
-        <button
-          onClick={() => paginate(currentPage + 1)}
-          className="px-3 py-1 mx-1 border rounded-md text-gray-700 bg-white hover:bg-gray-100"
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
+
+        {currentPage < totalPages && (
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            className="px-3 py-1 mx-1 border rounded-md text-gray-700 bg-white hover:bg-gray-100"
+          >
+            Next
+          </button>
+        )}
       </div>
 
       <FeaturedBiz />

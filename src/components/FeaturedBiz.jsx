@@ -49,7 +49,7 @@ const FeaturedBiz = () => {
             className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"
           ></div>
 
-          <span className="relative z-10 bg-white px-6">Featured Biz</span>
+          <span className="relative z-10 bg-white px-6">Newly Added Biz</span>
         </span>
       </div>
       <section className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
